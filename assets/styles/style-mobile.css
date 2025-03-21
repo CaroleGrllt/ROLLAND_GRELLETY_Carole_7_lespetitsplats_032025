@@ -1,0 +1,21 @@
+/* HEADER */
+
+.logo-container {
+    top: 20px;
+    left: 30px;
+}
+
+.logo {
+    width: 100px;
+}
+
+.header-title {
+    font-family: Anton;
+    color: rgba(255, 209, 91,1);
+    font-size: 15px;
+    margin: 28px 0 16px;
+}
+
+.input-container {
+    height: 30px;
+}

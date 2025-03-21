@@ -1,0 +1,22 @@
+@media (min-width: 768px) {
+
+    /* HEADER */
+
+    .logo-container {
+        top: 40px;
+        left: 50px;
+    }
+
+    .logo {
+        width: 175px;
+    }
+
+    .header-title {
+        font-size: 30px;
+        margin-bottom: 35px;
+    }
+
+    .input-container {
+        height: 40px;
+    }
+}

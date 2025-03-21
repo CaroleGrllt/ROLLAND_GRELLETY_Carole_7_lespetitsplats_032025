@@ -1,0 +1,18 @@
+@media (min-width: 576px) {
+
+    /* HEADER */
+
+    .logo-container {
+        top: 33px;
+        left: 40px;
+    }
+
+    .logo {
+        width: 140px;
+    }
+
+    .header-title {
+        font-size: 20px;
+        margin-bottom: 23px;
+    }
+}

@@ -15,4 +15,16 @@
         font-size: 20px;
         margin-bottom: 23px;
     }
+
+    .search-recipes {
+        font-size: 12px;
+    }
+
+    .search-recipes::placeholder {
+        font-size: 12px;
+    }
+
+    /* FILTERS */
+
+    /* CARDS */
 }

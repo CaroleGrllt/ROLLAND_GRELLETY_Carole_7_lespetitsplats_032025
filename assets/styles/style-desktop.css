@@ -17,8 +17,31 @@
         margin-bottom: 35px;
     }
 
-    .input-container {
-        height: 60px;
+    .search-recipes {
+        padding: 0 35px;
+        font-size: 16px;
     }
+
+    .search-recipes::placeholder {
+        font-size: 16px;
+    }
+
+    .fa-xmark {
+        font-size: 26px;
+    }
+
+    .glass-button {
+        width: 51px;
+        height: 51px;
+        margin: 10px 10px 10px 20px;
+    }
+
+    .fa-magnifying-glass {
+        font-size: 20px;
+    }
+
+    /* FILTERS */
+
+    /* CARDS */
 }
 

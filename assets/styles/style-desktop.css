@@ -26,17 +26,17 @@
         font-size: 16px;
     }
 
-    .fa-xmark {
+    .xmark-header {
         font-size: 26px;
     }
 
-    .glass-button {
+    .glass-button-header {
         width: 51px;
         height: 51px;
         margin: 10px 10px 10px 20px;
     }
 
-    .fa-magnifying-glass {
+    .glass-header {
         font-size: 20px;
     }
 

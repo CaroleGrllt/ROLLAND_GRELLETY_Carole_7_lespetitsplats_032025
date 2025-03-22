@@ -37,15 +37,16 @@
     outline: none;
 }
 
-.clear-button {
+.clear-button-header {
     background-color: white;
+    visibility: hidden;
 }
 
-.fa-xmark {
+.xmark-header {
     color: rgba(122, 122, 122, 1);
 }
 
-.glass-button {
+.glass-button-header {
     background-color: black;
     margin: 5px;
     width: 30px;
@@ -53,20 +54,36 @@
     transition: 0.3s;
 }
 
-.glass-button:hover {
+.glass-button-header:hover {
     background-color: rgba(255, 209, 91,1);
 }
 
-.fa-magnifying-glass {
+.glass-header {
     color: white;
     transition: 0.3s;
 }
 
-.glass-button:hover .fa-magnifying-glass {
+.glass-button-header:hover .glass-header {
     color: black;
 }
 
 /* FILTERS */
 
+.select-label {
+    background-color: white;
+    padding: 17px;
+}
+
+.select-label span:first-child {
+    font-family: Manrope;
+}
+
+.arrow-rotate{
+    transform: rotate(180deg);
+}
+
+.total-recipes {
+    font-family: Anton;
+}
 
 /* CARDS */

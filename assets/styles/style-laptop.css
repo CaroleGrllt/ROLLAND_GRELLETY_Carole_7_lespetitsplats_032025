@@ -25,11 +25,11 @@
         font-size: 14px;
     }
 
-    .fa-xmark {
+    .xmark-header {
         font-size: 23px;
     }
 
-    .glass-button {
+    .glass-button-header {
         margin: 8px 8px 8px 12px;
         width: 40px;
         height: 40px;
@@ -37,6 +37,13 @@
 
     /* FILTERS */
 
+    .select-container {
+        width: 190px;
+    }
+
+    .total-recipes {
+        font-size: 18px;
+    }
     /* CARDS */
 
 }

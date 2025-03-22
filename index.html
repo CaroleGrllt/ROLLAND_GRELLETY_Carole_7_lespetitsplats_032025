@@ -46,22 +46,99 @@
             </div>
             <div class="search-container position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center col-8">
                 <h1 class="header-title lh-base text-center">CHERCHEZ PARMI PLUS DE 1500 RECETTES <br> DU QUOTIDIEN,SIMPLES ET DÉLICIEUSES</h1>
-                <div class="input-container rounded col-12 d-flex justify-content-between">
+                <form class="input-container rounded col-12 d-flex justify-content-between">
                     <input class="search-recipes rounded border-0 col-8" type="text" id="search-recipe" placeholder="Rechercher une recette, un ingrédient,...">
                     <div class="d-flex">
-                        <button class="clear-button border-0 d-flex justify-content-center align-items-center">
-                            <i class="fa-solid fa-xmark"></i>
+                        <button class="clear-button-header border-0 d-flex justify-content-center align-items-center">
+                            <i class="xmark-header fa-solid fa-xmark"></i>
                         </button>
-                        <button class="glass-button border-0 rounded d-flex justify-content-center align-items-center">
-                            <i class="fa-solid fa-magnifying-glass"></i>
+                        <button class="glass-button-header border-0 rounded d-flex justify-content-center align-items-center" type="submit">
+                            <i class="glass-header fa-solid fa-magnifying-glass"></i>
                         </button>
                     </div>
-                </div> 
+                </form> 
             </div>
         </div>
     </header>
     <main>
-        
+        <section class="container-xxl bg-light p-md-0">
+            <div class="container py-2 p-md-0 ">
+                <div class=" d-flex flex-column flex-md-row justify-content-md-between">
+                    <div class="d-flex flex-column flex-md-row col-12 col-md-10 justify-content-md-around">
+
+                        <div class="select-container select-ingredients-container py-2 py-md-4">
+
+                            <div class="select-label rounded d-flex justify-content-between align-items-center">
+                                <span class="title ingredients-title">Ingrédients</span>
+                                <span class="fa-solid fa-chevron-down"></span>
+                            </div>
+
+                            <!-- <div class="select-content-dropdown">
+                              <div class="select-input">
+                                <input class="input" type="text" />
+                                <button class="clear-button-ingredients border-0 d-flex justify-content-center align-items-center">
+                                    <i class="xmark-ingredients fa-solid fa-xmark"></i>
+                                </button>
+                                <i class="glass-ingredients fa-solid fa-magnifying-glass"></i>
+                              </div>
+                              <div class="select-ingredients">
+                              </div>
+                            </div> -->
+
+                        </div>
+
+
+                        <div class="select-container select-appliances-container py-2 py-md-4">
+
+                            <div class="select-label rounded d-flex justify-content-between align-items-center">
+                                <span class="title appliances-title">Appareils</span>
+                                <span class="fa-solid fa-chevron-down"></span>
+                            </div>
+
+                            <!-- <div class="select-content-dropdown">
+                              <div class="select-input">
+                                <input class="input" type="text" />
+                                <button class="clear-button-appliances border-0 d-flex justify-content-center align-items-center">
+                                    <i class="xmark-appliances fa-solid fa-xmark"></i>
+                                </button>
+                                <i class="glass-appliances fa-solid fa-magnifying-glass"></i>
+                              </div>
+                              <div class="select-appliances">
+                              </div>
+                            </div> -->
+
+                        </div>
+
+
+
+                        <div class="select-container select-ustensils-container py-2 py-md-4">
+
+                            <div class="select-label rounded d-flex justify-content-between align-items-center">
+                                <span class="title ustensils-title">Ustensiles</span>
+                                <span class="fa-solid fa-chevron-down"></span>
+                            </div>
+
+                            <!-- <div class="select-content-dropdown">
+                              <div class="select-input">
+                                <input class="input" type="text" />
+                                <button class="clear-button-ustensils border-0 d-flex justify-content-center align-items-center">
+                                    <i class="xmark-ustensils fa-solid fa-xmark"></i>
+                                </button>
+                                <i class="glass-ustensils fa-solid fa-magnifying-glass"></i>
+                              </div>
+                              <div class="select-ustensils">
+                              </div>
+                            </div> -->
+
+                        </div>
+
+                    </div>
+                    <div class="col-12 col-md-2 text-center py-2 p-md-0 d-flex justify-content-center justify-content-md-end align-items-center">
+                        <p class="total-recipes m-0"><span class="dynamic-change">?</span> recettes</p>
+                    </div>
+                </div>                
+            </div>
+        </section>
     </main>
 </body>
 </html>

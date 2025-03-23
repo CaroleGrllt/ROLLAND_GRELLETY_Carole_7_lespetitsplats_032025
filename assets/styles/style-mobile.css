@@ -1,3 +1,6 @@
+/* GENERAL */
+
+
 /* HEADER */
 
 .logo-container {
@@ -16,33 +19,31 @@
     margin: 28px 0 16px;
 }
 
-.input-container {
-    background-color: white;
-}
-
 .search-recipes {
-    color: rgba(122, 122, 122, 1);
-    font-family: Manrope;
-    font-size: 10px;
     padding: 0 15px;
 }
 
-.search-recipes::placeholder {
+input {
+    color: rgba(122, 122, 122, 1);
+    font-family: Manrope;
+    font-size: 10px;
+}
+
+input::placeholder {
     font-family: Manrope;
     font-size: 10px;
     color: rgba(122, 122, 122, 1);
 }
 
-.search-recipes:focus-visible {
+input:focus-visible {
     outline: none;
 }
 
 .clear-button-header {
-    background-color: white;
     visibility: hidden;
 }
 
-.xmark-header {
+.fa-xmark-clear {
     color: rgba(122, 122, 122, 1);
 }
 
@@ -70,7 +71,6 @@
 /* FILTERS */
 
 .select-label {
-    background-color: white;
     padding: 17px;
 }
 
@@ -82,8 +82,98 @@
     transform: rotate(180deg);
 }
 
+.clear-button-ingredients,
+.clear-button-appliances,
+.clear-button-ustensils {
+    visibility: hidden;
+}
+
+.glass-ingredients,
+.glass-appliances,
+.glass-ustensils {
+    color: lightgrey;
+}
+
+.select-content-dropdown {
+    display: none;
+    min-height: 0;
+    transition: max-height .1s ease-in-out;
+}
+
+.open-dropdown {
+    max-height: 260px;
+    z-index: 1000;
+    display: block;
+}
+
+.select-ingredients,
+.select-appliances,
+.select-ustensils {
+    max-height: 200px;
+    overflow: scroll;
+}
+
+.select-ingredients::-webkit-scrollbar, 
+.select-appliances::-webkit-scrollbar,
+.select-ustensils::-webkit-scrollbar {
+    display: none;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    font-family: Manrope;
+    padding: 0 16px;
+}
+
+li:hover {
+    background-color: rgba(255, 209, 91,1);
+}
+
 .total-recipes {
     font-family: Anton;
 }
 
+/* ERROR */
+
+.error-section {
+    display: none;
+}
+
+/* TAGS */
+
+.tag {
+    background-color: rgba(255, 209, 91,1);
+    width: 200px;
+    padding: 16px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.tag span:first-child {
+    font-family: Manrope;
+}
+
 /* CARDS */
+.cards-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 50px;
+}
+
+.card {
+    border-radius: 15px;
+    border: none;
+    filter: drop-shadow(0px 3px 15px rgba(0, 0, 0, 0.1));
+}
+
+.card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}

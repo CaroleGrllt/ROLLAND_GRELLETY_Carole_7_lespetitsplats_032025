@@ -17,11 +17,14 @@
     }
 
     .search-recipes {
-        font-size: 14px;
         padding: 0 25px;
     }
 
-    .search-recipes::placeholder {
+    input {
+        font-size: 14px;
+    }
+
+    input::placeholder {
         font-size: 14px;
     }
 
@@ -39,11 +42,29 @@
 
     .select-container {
         width: 190px;
+        position: relative;
+    }
+
+    .select-content-dropdown {
+        position: absolute;
+        display: none;
+        min-height: 0;
+        transition: max-height .1s ease-in-out;
+    }
+
+    .open-dropdown {
+        max-height: 260px;
+        z-index: 1000;
+        display: block;
     }
 
     .total-recipes {
         font-size: 18px;
     }
     /* CARDS */
+
+    .cards-container {
+        grid-template-columns: 1fr 1fr;
+    }
 
 }

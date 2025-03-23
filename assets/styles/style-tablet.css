@@ -16,11 +16,11 @@
         margin-bottom: 23px;
     }
 
-    .search-recipes {
+    input {
         font-size: 12px;
     }
 
-    .search-recipes::placeholder {
+    input::placeholder {
         font-size: 12px;
     }
 

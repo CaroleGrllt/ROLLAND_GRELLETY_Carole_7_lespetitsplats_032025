@@ -1,5 +1,8 @@
 /* GENERAL */
 
+a {
+    text-decoration: none;
+}
 
 /* HEADER */
 
@@ -158,16 +161,21 @@ li:hover {
 }
 
 /* CARDS */
-.cards-container {
+ .cards-container {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 50px;
 }
 
+article {
+    border-radius: 15px;
+    filter: drop-shadow(0px 3px 15px rgba(0, 0, 0, 0.1));
+}
+
 .card {
+    height: 730px;
     border-radius: 15px;
     border: none;
-    filter: drop-shadow(0px 3px 15px rgba(0, 0, 0, 0.1));
 }
 
 .card img {
@@ -176,4 +184,34 @@ li:hover {
     object-fit: cover;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+}
+
+.time-container {
+    font-family: Manrope;
+    font-size: 12px;
+    background-color: rgba(255, 209, 91,1);
+}
+
+.card-title {
+    font-family: Anton;
+    font-size: 16px;
+}
+
+.card-recipe, .card-ingredients {
+    font-family: Manrope;
+    font-size: 12px;
+    color: grey;
+}
+
+.card-text, .ingredient span {
+    font-family: Manrope;
+    font-size: 14px;
+}
+
+.ingredient span:first-child {
+    font-weight: 600;
+}
+
+.ingredient span:last-child {
+    color: grey;
 }

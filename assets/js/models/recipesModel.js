@@ -17,28 +17,5 @@ export default function dataRecipes() {
         return data.recipes
     }
 
-    // async function getRecipesByIngredient(ingredient) {
-    //     let data = await getAllRecipes()
-    //     console.log(data)
-    //     const recipesByIngredient = data.filter(recipes => recipes.ingredient = "Fraise")
-    //     console.log(recipesByIngredient)
-
-    // }
-
-    // async function getRecipesByAppliance(appliance) {
-    //     let data = await getAllRecipes()
-    //     // console.log(data)
-    //     let recipesByAppliance = data.filter((recipes) => recipes.appliance === appliance)
-    //     // console.log(recipesByAppliance)
-    //     return recipesByAppliance
-    // }
-
-    // async function getRecipesByUstensils(ustensil) {
-    //     let data = await getAllRecipes()
-    //     console.log(data)
-
-    // }
-
-
     return { getAllRecipes }
 }

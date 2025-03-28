@@ -208,6 +208,14 @@ article {
     font-size: 14px;
 }
 
+.card-text {
+    display: -webkit-box; 
+    line-clamp: 4;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
 .ingredient span:first-child {
     font-weight: 600;
 }

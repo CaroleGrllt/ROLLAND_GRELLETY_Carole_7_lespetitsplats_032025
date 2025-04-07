@@ -39,6 +39,27 @@ export function getUstensilsList(recipes) {
     return Array.from(ustensilsSet).sort();
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // TROUVER DES RECETTES SELON INGREDIENT
 export function getRecipesByIngredient(recipes, ingredient) {
     return recipes.filter(recipe => //filtre pour garder que les bonnes recettes
@@ -48,6 +69,7 @@ export function getRecipesByIngredient(recipes, ingredient) {
 
 // const fraise = getRecipesByIngredient(allRecipes, "coco")
 // console.log(fraise)
+
 
 //TROUVER DES RECETTES SELON APPAREIL
 export function getRecipesByAppliance(recipes, appliance) {

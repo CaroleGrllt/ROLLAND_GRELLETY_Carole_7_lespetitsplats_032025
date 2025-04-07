@@ -50,7 +50,7 @@
                     <input class="search-recipes rounded border-0 col-8" type="text" id="search-recipe" placeholder="Rechercher une recette, un ingrédient,...">
                     <div class="d-flex">
                         <span class="clear-button-header d-flex justify-content-center align-items-center">
-                            <i class="xmark-header fa-xmark-clear fa-solid fa-xmark"></i>
+                            <i class="cross xmark-header fa-xmark-clear fa-solid fa-xmark"></i>
                         </span>
                         <span class="glass-button-header rounded d-flex justify-content-center align-items-center">
                             <i class="glass-header fa-solid fa-magnifying-glass"></i>
@@ -70,16 +70,16 @@
                                 <span class="title ingredients-title">Ingrédients</span>
                                 <span class="fa-solid fa-chevron-down"></span>
                             </div>
-                            <div class="select-content-dropdown open-dropdown bg-white rounded-bottom">
-                              <div class="select-input rounded d-flex justify-content-between border bg-white p-1 mx-3 mb-4 mb-md-3">
-                                <input class="input search-ingredients border-0 col-10 col-md-8" type="text" />
-                                <div class="d-flex col-2 col-md-4 justify-content-around align-items-center">
-                                    <span class="clear-button-ingredients d-flex justify-content-center align-items-center">
-                                        <i class="xmark-ingredients fa-xmark-clear fa-solid fa-xmark"></i>
-                                    </span>
-                                    <i class="glass-ingredients fa-solid fa-magnifying-glass"></i>
-                                </div>
-                              </div>
+                            <div class="select-content-dropdown bg-white rounded-bottom">
+                                <form class="select-input rounded d-flex justify-content-between border bg-white p-1 mx-3 mb-4 mb-md-3">
+                                    <input class="input search-ingredients border-0 col-10 col-md-8" type="text" />
+                                    <div class="d-flex col-2 col-md-4 justify-content-around align-items-center">
+                                        <span class="clear-button-ingredients d-flex justify-content-center align-items-center">
+                                            <i class="cross xmark-ingredients fa-xmark-clear fa-solid fa-xmark"></i>
+                                        </span>
+                                        <i class="glass-ingredients fa-solid fa-magnifying-glass"></i>
+                                    </div>
+                                </form>
                               <div class="select-ingredients">
                                 <ul class="p-0">
                                     <!-- LISTE GENEREE PAR JS -->
@@ -92,16 +92,16 @@
                                 <span class="title appliances-title">Appareils</span>
                                 <span class="fa-solid fa-chevron-down"></span>
                             </div>
-                            <div class="select-content-dropdown open-dropdown bg-white rounded-bottom">
-                              <div class="select-input rounded d-flex justify-content-between border bg-white p-1 mx-3 mb-4 mb-md-3">
+                            <div class="select-content-dropdown bg-white rounded-bottom">
+                              <form class="select-input rounded d-flex justify-content-between border bg-white p-1 mx-3 mb-4 mb-md-3">
                                 <input class="input search-appliances border-0 col-10 col-md-8" type="text" />
                                 <div class="d-flex col-2 col-md-4 justify-content-around align-items-center">
                                     <span class="clear-button-appliances d-flex justify-content-center align-items-center">
-                                        <i class="xmark-appliances fa-xmark-clear fa-solid fa-xmark"></i>
+                                        <i class="cross xmark-appliances fa-xmark-clear fa-solid fa-xmark"></i>
                                     </span>
                                     <i class="glass-appliances fa-solid fa-magnifying-glass"></i>
                                 </div>
-                              </div>
+                            </form>
                               <div class="select-appliances">
                                 <ul class="p-0">
                                     <!-- LISTE GENEREE PAR JS -->
@@ -114,16 +114,16 @@
                                 <span class="title ustensils-title">Ustensiles</span>
                                 <span class="fa-solid fa-chevron-down"></span>
                             </div>
-                            <div class="select-content-dropdown open-dropdown bg-white rounded-bottom col-12">
-                              <div class="select-input rounded d-flex justify-content-between border bg-white p-1 mx-3 mb-4 mb-md-3">
+                            <div class="select-content-dropdown bg-white rounded-bottom col-12">
+                              <form class="select-input rounded d-flex justify-content-between border bg-white p-1 mx-3 mb-4 mb-md-3">
                                 <input class="input search-ustensils border-0 col-10 col-md-8" type="text" />
                                 <div class="d-flex col-2 col-md-4 justify-content-around align-items-center">
                                     <span class="clear-button-ustensils border-0 bg-white d-flex justify-content-center align-items-center">
-                                        <i class="xmark-ustensils fa-xmark-clear fa-solid fa-xmark"></i>
+                                        <i class="cross xmark-ustensils fa-xmark-clear fa-solid fa-xmark"></i>
                                     </span>
                                     <i class="glass-ustensils fa-solid fa-magnifying-glass"></i>
                                 </div>
-                              </div>
+                            </form>
                               <div class="select-ustensils">
                                 <ul class="p-0">
                                     <!-- LISTE GENEREE PAR JS -->
@@ -133,19 +133,19 @@
                         </div>
                     </div>
                     <div class="col-12 col-md-2 col-xl-4 text-center py-2 p-md-0 d-flex justify-content-center justify-content-md-end align-items-center ">
-                        <p class="total-recipes m-0 me-xxl-5"><span class="dynamic-change">1500</span> recettes</p>
+                        <p class="total-recipes m-0 me-xxl-5"><span class="dynamic-change"></span> recettes</p>
                     </div>
                 </div>                
             </div>
         </section>
         <section class="error-section container-xxl bg-light">
             <div class="container d-flex align-items-center justify-content-center">
-                <p class="text-center">Aucune recette ne contient <span class="search-error">XXX</span>.<br>Vous pouvez chercher <span class="search-advice">XXX</span> </p>
+                <p class="text-center">Aucune recette ne contient <span class="search-error"></span>.<br>Vous pouvez chercher "tarte aux pommes", "poisson", etc...</p>
             </div>
         </section>
         <section class="tags-section container-xxl bg-light p-0">
             <div class="tags-container container d-flex gap-4 justify-content-center justify-content-md-start flex-wrap p-0">
-                <div class="tag">
+                <!-- <div class="tag">
                     <span>Ingrédient</span>
                     <span><i class="fa-solid fa-xmark"></i></span>
                 </div>
@@ -156,7 +156,7 @@
                 <div class="tag">
                     <span>Appareil</span>
                     <span><i class="fa-solid fa-xmark"></i></span>
-                </div>
+                </div> -->
             </div>
         </section>
         <section class="cards-section container-xxl bg-light p-0 mt-5 pb-5">

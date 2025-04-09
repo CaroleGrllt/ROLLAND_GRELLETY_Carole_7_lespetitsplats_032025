@@ -1,15 +1,43 @@
 import dataRecipes from "../models/recipesModel.js"
 
-const data = dataRecipes()
+export async function getRecipes(state) {
 
+    const data = dataRecipes()
 
-export const allRecipes = await data.getAllRecipes()
+    let recipes = await data.getAllRecipes()
+ 
+    // CHAMPS DE RECHERCHE
+    if(state.searchLength >=3) {
+
+        recipes = recipes.filter(recipe => {
+            const name = recipe.name.toLowerCase().split(' ')
+            const description = recipe.description.toLowerCase().split(' ')
+            const ingredients = recipe.ingredients.map(data => data.ingredient.toLowerCase())
+            const data = [...name, ...description, ...ingredients]
+
+            return(
+                state.search.every(word =>
+                    data.some(dataWord => dataWord.includes(word.toLowerCase()))
+                ) 
+            )
+        })
+    }
+
+    // INGREDIENTS
+
+    // APPAREILS
+
+    // USTENSILES
+
+    return recipes
+}
 
 
 // OBTENIR LA LISTE DES INGREDIENTS
 export function getIngredientsList(recipes) {
     const ingredientsSet = new Set(); //permet de ne pas avoir de doublons
     // Parcourir toutes les recettes et ajouter les ingrédients au Set
+
     recipes.forEach(recipe => {
         recipe.ingredients.forEach(ing => {
             ingredientsSet.add(ing.ingredient.toLowerCase()); // Utilisation de toLowerCase() pour éviter les doublons avec différentes casses
@@ -69,6 +97,7 @@ export function getRecipesByIngredient(recipes, ingredient) {
 
 // const fraise = getRecipesByIngredient(allRecipes, "coco")
 // console.log(fraise)
+
 
 
 //TROUVER DES RECETTES SELON APPAREIL

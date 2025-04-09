@@ -6,6 +6,7 @@ export default function templateCards(data) {
     const article = document.createElement( 'article' )
 
     const link = document.createElement( 'a' )
+    link.setAttribute('href', '#')
 
     const card = document.createElement( 'div' )
     card.classList.add('card')
@@ -16,6 +17,7 @@ export default function templateCards(data) {
 
     const img = document.createElement( 'img' )
     img.setAttribute('src', picture)
+    img.setAttribute('alt', `illustration ${data.name}`)
 
     const timeContainer = document.createElement('div')
     timeContainer.classList.add(

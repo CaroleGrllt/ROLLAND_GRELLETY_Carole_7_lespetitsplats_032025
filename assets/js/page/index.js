@@ -1,11 +1,11 @@
-import { allRecipes , getIngredientsList , getAppliancesList , getUstensilsList} from "../controllers/recipesController.js";
-import { Search } from "../controllers/searchController.js";
+import { getRecipes , getIngredientsList , getAppliancesList , getUstensilsList} from "../controllers/recipesController.js";
 import { clearInput } from "../utils/utils.js";
 import templateCard from '../templates/cards.js'
 import templateFilters from "../templates/filters.js";
+import StateFilter from "../state/stateFilter.js";
 
 // INSTANCIATION
-const search            = new Search()
+const oStateFilter      = new StateFilter()
 
 // RECUPERATION ELEMENTS HTML
 const searchInput       = document.querySelector(".search-recipes")
@@ -19,7 +19,7 @@ const crosses           = document.querySelectorAll(".cross")
 const totalRecipes      = document.querySelector(".dynamic-change")
 
 // RECUPERATION CONTENU NECESSAIRE
-const recipes           = allRecipes
+const recipes           = await getRecipes(oStateFilter)
 const allIngredients    = getIngredientsList(recipes)
 const allAppliances     = getAppliancesList(recipes)
 const allUstensils      = getUstensilsList(recipes)
@@ -49,16 +49,15 @@ allUstensils.forEach((ustensil) => {
 
 
 // FONCTION AFFICHAGE APRES RECHERCHE INPUT
-function displaySearch() {
-    const newSearch = searchInput.value
+async function displaySearch() {
     // console.log(newSearch)
-    let results = search.setSearch(newSearch)
-    console.log(results)
+    let results = await getRecipes(oStateFilter)
+    // console.log(results)
     totalRecipes.textContent = results.length
 
-    const inputForm = searchInput.closest('form');
-    const currentCross = inputForm.querySelector('.cross');
-    currentCross.style.visibility = newSearch.trim() === "" ? "hidden" : "visible";
+    // const inputForm = searchInput.closest('form');
+    // const currentCross = inputForm.querySelector('.cross');
+    // currentCross.style.visibility = newSearch.trim() === "" ? "hidden" : "visible";
 
     if(results.length === 0) {
         // console.log('Recherche sans résultat')
@@ -77,7 +76,10 @@ function displaySearch() {
 
 
 //LISTENERS
-searchInput.addEventListener('input', displaySearch)
+searchInput.addEventListener('input', async () => {
+    oStateFilter.setSearch(searchInput.value)
+    await displaySearch()
+})
 crosses.forEach((cross) => cross.addEventListener("click", (event) => clearInput(event, displaySearch))); // displaySearch en callback pour fonctionner dans fonction clearInput du fichier utils.js
 
 

@@ -1,14 +1,13 @@
 import dataRecipes from "../models/recipesModel.js"
 
 export async function getRecipes(state) {
+    
 
     const data = dataRecipes()
-
     let recipes = await data.getAllRecipes()
  
     // CHAMPS DE RECHERCHE
     if(state.searchLength >=3) {
-
         recipes = recipes.filter(recipe => {
             const name = recipe.name.toLowerCase().split(' ')
             const description = recipe.description.toLowerCase().split(' ')
@@ -31,6 +30,9 @@ export async function getRecipes(state) {
 
     return recipes
 }
+
+
+
 
 
 // OBTENIR LA LISTE DES INGREDIENTS

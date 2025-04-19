@@ -1,7 +1,6 @@
 
 // DOM ELEMENTS
 const allDropdownBtns   = document.querySelectorAll(".dropdown-btn")
-const crosses           = document.querySelectorAll(".cross")
 
 
 // OPEN/CLOSE DROPDOWNS MENUS
@@ -39,9 +38,9 @@ function closeOtherMenus(target) {
 
 function closeMenus(btn) {
     const container = btn.closest('.select-container');
-    const input = container.querySelector('input');
-    const menu = container.querySelector('.select-content-dropdown');
-    const cross = input.closest('form').querySelector('.cross');
+    const input     = container.querySelector('input');
+    const menu      = container.querySelector('.select-content-dropdown');
+    const cross     = input.closest('form').querySelector('.cross');
 
     btn.classList.add('fa-chevron-down');
     btn.classList.remove('fa-chevron-up');
@@ -72,5 +71,4 @@ export function clearInputs(e) {
     const input = target.closest("form").querySelector("input")
     target.style.visibility ='hidden'
     input.value = ''
-
 }

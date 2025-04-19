@@ -6,7 +6,7 @@ export async function getRecipes(state) {
     const data = dataRecipes()
     let recipes = await data.getAllRecipes()
  
-    // CHAMPS DE RECHERCHE
+    // SEARCH FIELD
     if(state.searchLength >=3) {
         recipes = recipes.filter(recipe => {
             const name = recipe.name.toLowerCase().split(' ')
@@ -22,30 +22,52 @@ export async function getRecipes(state) {
         })
     }
 
-    // INGREDIENTS
+    // INGREDIENTS 
+    if(state.ingredients.length > 0 ) {
+        // console.log('entrée dans condition')
+        recipes = recipes.filter(recipe => {
+            const ingredients = recipe.ingredients.map(data => data.ingredient.toLowerCase())
+            // console.log(ingredients)
+            return (
+                state.ingredients.every(ingredient => 
+                    ingredients.some(ing => ing.includes(ingredient.toLowerCase()))
+                )
+            )
+        })
+        // console.log(recipes)
+    }
+    // APPLIANCES 
+    if(state.appliances.length > 0 ) {
+        console.log('entrée dans condition')
+        recipes = recipes.filter(recipe => {
+            
+            const appliance = recipe.appliance.toLowerCase()
+            console.log(appliance)
+            // On vérifie si l'appareil est dans la liste des filtres
+            return( state.appliances.some(data => data.toLowerCase() === appliance) //méthode some() teste si au moins un élément passe
+            )
+        
+        })
+    }
+    // USTENSILS 
 
-    // APPAREILS
-
-    // USTENSILES
+    
 
     return recipes
 }
 
 
-
-
-
-// OBTENIR LA LISTE DES INGREDIENTS
 export function getIngredientsList(recipes) {
     const ingredientsSet = new Set(); //permet de ne pas avoir de doublons
     // Parcourir toutes les recettes et ajouter les ingrédients au Set
 
     recipes.forEach(recipe => {
         recipe.ingredients.forEach(ing => {
-            ingredientsSet.add(ing.ingredient.toLowerCase()); // Utilisation de toLowerCase() pour éviter les doublons avec différentes casses
+            ingredientsSet.add(ing.ingredient.toLowerCase());
         });
     });
-    return Array.from(ingredientsSet).sort();
+
+    return Array.from(ingredientsSet).sort()
 }
 
 // OBTENIR LA LISTE DES APPAREILS

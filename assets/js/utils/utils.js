@@ -5,12 +5,10 @@ export function toggleBtn(event) {
     const container = event.target.closest('.select-container')
     const target = container.querySelector('.dropdown-btn')
 
-    if (event.target.closest('form')) {
-        return;
-    } 
+    if (event.target.closest('form')) return
     // comme container.addEventListener('click', toggleBtn) => chaque clic toggle bloc.
     // Sauf que input dans container => bloquer toggle avec if. 
-    target.classList.contains('fa-chevron-down') ? target.classList.replace('fa-chevron-down', 'fa-chevron-up') : target.classList.replace('fa-chevron-up', 'fa-chevron-down');
+    target.classList.contains('fa-chevron-down') ? target.classList.replace('fa-chevron-down', 'fa-chevron-up') : target.classList.replace('fa-chevron-up', 'fa-chevron-down')
 
     stateDropdowns(target)
     closeOtherMenus(target)
@@ -30,8 +28,8 @@ function stateDropdowns(target) {
     } else {
         menu.classList.remove('open-dropdown')
         menu.style.display = 'none'
-        input.value = '';
-        cross.style.visibility = 'hidden';
+        input.value = ''
+        cross.style.visibility = 'hidden'
     }
 }
 
@@ -71,10 +69,30 @@ document.addEventListener('click', (event) => {
 
 
 // INPUTS
+export function filterList(e, ul) {
+    const value = e.target.value.toLowerCase().trim();
+    const filterItems = ul.querySelectorAll('li');
+
+    filterItems.forEach(filter => {
+        const textFilter = filter.textContent
+        const words = textFilter.split(' ') // suppr. espaces en faisant de plusieurs mots des "morceaux" / mots uniques
+        
+        const matchingValue = words.some(word => word.startsWith(value)) 
+        //.some() teste si au moins un élément du tableau passe le test fourni
+        //.startsWith() renvoie un booléen. Check si chaine de caractères commence par caractères fournie en argument (cf. MDN)
+
+        if (matchingValue) {
+            filter.style.display = 'block';
+        } else {
+            filter.style.display = 'none';
+        }
+    });
+}
+
 export function displayCross(event) {
     const target = event.target
     const cross = target.closest('form').querySelector('.cross')
-    target.value === "" ? cross.style.visibility ='hidden' : cross.style.visibility ='visible';
+    target.value === "" ? cross.style.visibility ='hidden' : cross.style.visibility ='visible'
 }
 
 // CLEAR INPUTS
@@ -83,4 +101,16 @@ export function clearInputs(e) {
     const input = target.closest("form").querySelector("input")
     target.style.visibility ='hidden'
     input.value = ''
+
+    const dropdown = target.closest('.select-content-dropdown'); 
+    // fonction utilisée sur 1 élement statique et 3 dynamiques
+    // donc doit trouver le dropdown seulement si existe. Car pas présent dans la barre de recherche du header (elem. statique)
+    if (dropdown) {
+        const ul = dropdown.querySelector('ul');
+        const filterItems = ul.querySelectorAll('li');
+        filterItems.forEach(filter => {
+            filter.style.display = 'block';
+        });
+    }
+
 }

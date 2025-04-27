@@ -20,9 +20,7 @@ const totalRecipes      = document.querySelector(".dynamic-change")
 const tagsContainer     = document.querySelector('.tags-container')
 
 // FONCTION AFFICHAGE
-
 async function displayCards() {
-    
     let results = await getRecipes(oStateFilter)
     totalRecipes.textContent = results.length + " recettes"
 
@@ -44,9 +42,9 @@ async function displayCards() {
 }
 
 function displayFilters(recipes) {
-    const sortedIngredients = getIngredientsList(recipes);
-    const sortedAppliances = getAppliancesList(recipes);
-    const sortedUstensils = getUstensilsList(recipes);
+    const sortedIngredients = getIngredientsList(recipes)
+    const sortedAppliances = getAppliancesList(recipes)
+    const sortedUstensils = getUstensilsList(recipes)
 
     // toutes mes listes triées par type de filtre => 3 tableaux
     const data = {
@@ -55,10 +53,9 @@ function displayFilters(recipes) {
         ustensils: sortedUstensils
     };
 
-    const filtersTemplate = templateFilter(data);
-    filterContainer.innerHTML = '';
-    filterContainer.appendChild(filtersTemplate);
-
+    const filtersTemplate = templateFilter(data)
+    filterContainer.innerHTML = ''
+    filterContainer.appendChild(filtersTemplate)
 
     const filterItems = document.querySelectorAll('ul')
     filterItems.forEach((item) => {
@@ -84,7 +81,6 @@ function displayFilters(recipes) {
         })
     })
 }
-
 
 //LISTENERS
 searchInput.addEventListener('input', async (e) => {
@@ -117,9 +113,5 @@ cross.addEventListener("click", async (e) => {
     await displayCards()        
 })
 
-
-
-
 // AFFICHAGE INITIAL
-
 displayCards()

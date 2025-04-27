@@ -103,6 +103,10 @@ searchInput.addEventListener('input', async (e) => {
             oStateFilter.unsetUstensils(ustensil)
         })
     }
+
+    const tagsContainer = document.querySelector('.tags-container')
+    const tags = tagsContainer.querySelectorAll('.tag')
+    tags.forEach(tag => tag.remove())
     
     await displayCards()
 })

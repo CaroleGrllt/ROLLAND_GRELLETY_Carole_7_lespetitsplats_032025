@@ -19,6 +19,7 @@ export default class StateFilter {
 
     setIngredients(value) {
         this.ingredients.push(value.toLowerCase())
+
     }
 
     unsetIngredients(value) {
@@ -30,15 +31,16 @@ export default class StateFilter {
     }
 
     unsetAppliances() {
-        
+        this.appliances = []
     }
 
-    setUstensils() {
-        
+    setUstensils(value) {
+        this.ustensils.push(value.toLowerCase())
     }
 
-    unsetUstensils() {
-        
+    unsetUstensils(value) {
+        this.ustensils = this.ustensils.filter(ustensil => ustensil !== value)
+
     }
 }
 

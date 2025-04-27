@@ -24,34 +24,41 @@ export async function getRecipes(state) {
 
     // INGREDIENTS 
     if(state.ingredients.length > 0 ) {
-        // console.log('entrée dans condition')
         recipes = recipes.filter(recipe => {
-            const ingredients = recipe.ingredients.map(data => data.ingredient.toLowerCase())
-            // console.log(ingredients)
+            const ingredients = recipe.ingredients.map(data => data.ingredient.toLowerCase()) //casse => miniscule
             return (
                 state.ingredients.every(ingredient => 
-                    ingredients.some(ing => ing.includes(ingredient.toLowerCase()))
+                    ingredients.some(ing => ing.includes(ingredient.toLowerCase())) //méthode some() teste si au moins un élément correspond
                 )
             )
         })
-        // console.log(recipes)
     }
+
     // APPLIANCES 
     if(state.appliances.length > 0 ) {
-        console.log('entrée dans condition')
         recipes = recipes.filter(recipe => {
             
             const appliance = recipe.appliance.toLowerCase()
-            console.log(appliance)
             // On vérifie si l'appareil est dans la liste des filtres
-            return( state.appliances.some(data => data.toLowerCase() === appliance) //méthode some() teste si au moins un élément passe
+            return ( 
+                state.appliances.some(data => data.toLowerCase() === appliance) 
             )
         
         })
     }
-    // USTENSILS 
 
+    // USTENSILS 
+    if (state.ustensils.length > 0) {
+        recipes = recipes.filter(recipe => {
+            const ustensils = recipe.ustensils.map(data => data.toLowerCase())
     
+            return (
+                state.ustensils.every(ustensil =>
+                    ustensils.some(ust => ust.includes(ustensil.toLowerCase()))
+                )
+            )
+        })
+    }
 
     return recipes
 }
@@ -95,52 +102,35 @@ export function getUstensilsList(recipes) {
 
 
 
+// // TROUVER DES RECETTES SELON INGREDIENT
+// export function getRecipesByIngredient(recipes, ingredient) {
+//     return recipes.filter(recipe => //filtre pour garder que les bonnes recettes
+//         recipe.ingredients.some(ing => //.some() permet de vérifier la présence de l'ingrédient demander
+//             ing.ingredient.toLowerCase().includes(ingredient.toLowerCase()))) //includes permet de taper un mot clé et d'afficher quand même les recettes => "coco" pour "lait de coco"
+// }
+
+// // const fraise = getRecipesByIngredient(allRecipes, "coco")
+// // console.log(fraise)
 
 
 
+// //TROUVER DES RECETTES SELON APPAREIL
+// export function getRecipesByAppliance(recipes, appliance) {
+//     return recipes.filter(recipe => 
+//         recipe.appliance.toLowerCase() === appliance.toLowerCase())
+// }
 
+// // const four = getRecipesByAppliance(allRecipes, "four")
+// // console.log(four)
 
+// // TROUVER DES RECETTES SELON USTENSILE
+// export function getRecipesByUstensil(recipes, ustensil) {
+//     return recipes.filter(recipe => 
+//         recipe.ustensils.some(ust => 
+//             ust.toLowerCase().includes(ustensil.toLowerCase()))) 
+// }
 
-
-
-
-
-
-
-
-
-
-
-
-// TROUVER DES RECETTES SELON INGREDIENT
-export function getRecipesByIngredient(recipes, ingredient) {
-    return recipes.filter(recipe => //filtre pour garder que les bonnes recettes
-        recipe.ingredients.some(ing => //.some() permet de vérifier la présence de l'ingrédient demander
-            ing.ingredient.toLowerCase().includes(ingredient.toLowerCase()))) //includes permet de taper un mot clé et d'afficher quand même les recettes => "coco" pour "lait de coco"
-}
-
-// const fraise = getRecipesByIngredient(allRecipes, "coco")
-// console.log(fraise)
-
-
-
-//TROUVER DES RECETTES SELON APPAREIL
-export function getRecipesByAppliance(recipes, appliance) {
-    return recipes.filter(recipe => 
-        recipe.appliance.toLowerCase() === appliance.toLowerCase())
-}
-
-// const four = getRecipesByAppliance(allRecipes, "four")
-// console.log(four)
-
-// TROUVER DES RECETTES SELON USTENSILE
-export function getRecipesByUstensil(recipes, ustensil) {
-    return recipes.filter(recipe => 
-        recipe.ustensils.some(ust => 
-            ust.toLowerCase().includes(ustensil.toLowerCase()))) 
-}
-
-// const citron = getRecipesByUstensil(allRecipes, "citron")
-// console.log(citron)
+// // const citron = getRecipesByUstensil(allRecipes, "citron")
+// // console.log(citron)
 
 

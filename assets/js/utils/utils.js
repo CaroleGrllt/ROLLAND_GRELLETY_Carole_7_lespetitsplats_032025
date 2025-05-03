@@ -1,3 +1,14 @@
+// ESCAPE INJECTIONS
+
+export function escapeInjection(value) {
+    return value
+    .replace(/&/g, '&amp;') // Remplace '&' par '&amp;'
+    .replace(/</g, '&lt;') // Remplace '<' par '&lt;'
+    .replace(/>/g, '&gt;') // Remplace '>' par '&gt;'
+    .replace(/"/g, '&quot;') // Remplace '"' par '&quot;'
+    .replace(/'/g, '&#39;') // Remplace "'" par '&#39;'
+    .replace(/`/g, '&#96;') // Remplace '`' par '&#96;'
+}
 
 // OPEN/CLOSE DROPDOWNS MENUS
 
@@ -70,7 +81,9 @@ document.addEventListener('click', (event) => {
 
 // INPUTS
 export function filterList(e, ul) {
-    const value = e.target.value.toLowerCase().trim();
+    const string = e.target.value.toLowerCase().trim();
+    const value = escapeInjection(string)
+
     const filterItems = ul.querySelectorAll('li');
 
     filterItems.forEach(filter => {

@@ -1,4 +1,4 @@
-import { toggleBtn, displayCross, clearInputs, filterList } from "../utils/utils.js"
+import { escapeInjection ,toggleBtn, displayCross, clearInputs, filterList } from "../utils/utils.js"
 
 
 // CREATE ELEMENTS FILTERS

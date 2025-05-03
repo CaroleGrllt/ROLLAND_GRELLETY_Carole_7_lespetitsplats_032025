@@ -22,104 +22,98 @@ const tagsContainer     = document.querySelector('.tags-container')
 
 // FONCTION AFFICHAGE
 async function displayCards() {
-    let results = await getRecipes(oStateFilter)
-    totalRecipes.textContent = results.length + " recettes"
+    let results = await getRecipes(oStateFilter);
+    totalRecipes.textContent = results.length + " recettes";
 
-    if(results.length === 0) {
-        errorMessage.style.display = "block"
-        errorSearch.textContent ="'" + searchInput.value + "'"
-        cardsSection.innerHTML = ""
+    if (results.length === 0) {
+        errorMessage.style.display = "block";
+        errorSearch.textContent = "'" + searchInput.value + "'";
+        cardsSection.innerHTML = "";
     } else {
-        errorMessage.style.display = "none"
-        cardsSection.innerHTML = ""
-        results.forEach((result) => {
-            const cardTemplate = templateCard(result)
-            cardsSection.appendChild(cardTemplate)
-        })
-    }
-    displayFilters(results)
+        errorMessage.style.display = "none";
+        cardsSection.innerHTML = "";
 
-    return results
+        for (let i = 0; i < results.length; i++) {
+            const cardTemplate = templateCard(results[i]);
+            cardsSection.appendChild(cardTemplate);
+        }
+    }
+
+    displayFilters(results);
+    return results;
 }
 
 function displayFilters(recipes) {
-    const sortedIngredients = getIngredientsList(recipes)
-    const sortedAppliances = getAppliancesList(recipes)
-    const sortedUstensils = getUstensilsList(recipes)
+    const sortedIngredients = getIngredientsList(recipes);
+    const sortedAppliances = getAppliancesList(recipes);
+    const sortedUstensils = getUstensilsList(recipes);
 
-    // toutes mes listes triées par type de filtre => 3 tableaux
     const data = {
         ingredients: sortedIngredients,
         appliances: sortedAppliances,
         ustensils: sortedUstensils
     };
 
-    const filtersTemplate = templateFilter(data)
-    filterContainer.innerHTML = ''
-    filterContainer.appendChild(filtersTemplate)
+    const filtersTemplate = templateFilter(data);
+    filterContainer.innerHTML = '';
+    filterContainer.appendChild(filtersTemplate);
 
-    const filterItems = document.querySelectorAll('ul')
-    filterItems.forEach((item) => {
-        item.addEventListener('click', async (e) => {
-            const target = e.target.closest('li')
-            const id = target.dataset.id
-            const type = target.dataset.type
+    const filterItems = document.querySelectorAll('ul');
+    
+    for (let i = 0; i < filterItems.length; i++) {
+        const item = filterItems[i];
 
-            const tagsTemplate = templateTags(id, type, oStateFilter, displayCards)
-            if (tagsTemplate) { // vérifie que null est pas renvoyé par template => cas doublons
+        item.addEventListener('click', async function (e) {
+            const target = e.target.closest('li');
+            if (!target) return;
+
+            const id = target.dataset.id;
+            const type = target.dataset.type;
+
+            const tagsTemplate = templateTags(id, type, oStateFilter, displayCards);
+            if (tagsTemplate) {
                 tagsContainer.appendChild(tagsTemplate);
             }
 
             if (type === 'ingredients') {
-                oStateFilter.setIngredients(id)
+                oStateFilter.setIngredients(id);
             } else if (type === 'appliances') {
-                oStateFilter.setAppliances(id)
+                oStateFilter.setAppliances(id);
             } else if (type === 'ustensils') {
-                oStateFilter.setUstensils(id)
+                oStateFilter.setUstensils(id);
             }
 
-            await displayCards()        
-        })
-    })
+            await displayCards();
+        });
+    }
 }
 
 //LISTENERS
-searchInput.addEventListener('input', async (e) => {
+searchInput.addEventListener('input', async function(e) {
+    displayCross(e);
 
-    displayCross(e)
+    oStateFilter.setSearch(searchInput.value);
 
-    oStateFilter.setSearch(searchInput.value)
-    
-    if(oStateFilter.ingredients.length > 0 || oStateFilter.appliances.length > 0 || oStateFilter.ustensils.length > 0) {
-        // const ingredientsArray = oStateFilter.ingredients
-        // const appliancesArray = oStateFilter.appliances
-        // const ustensilsArray = oStateFilter.ustensils
-
-        // ingredientsArray.forEach(ingredient => {
-        //     oStateFilter.unsetIngredients(ingredient)
-        // })
-
-        // oStateFilter.unsetAppliances(appliancesArray)
-
-        // ustensilsArray.forEach(ustensil => {
-        //     oStateFilter.unsetUstensils(ustensil)
-        // })
-
-        oStateFilter.unsetAll()
-        removeAllTags()
+    if (
+        oStateFilter.ingredients.length > 0 ||
+        oStateFilter.appliances.length > 0 ||
+        oStateFilter.ustensils.length > 0
+    ) {
+        oStateFilter.unsetAll();
+        removeAllTags();
     }
 
-    await displayCards()
-})
+    await displayCards();
+});
 
-cross.addEventListener("click", async (e) => {
-    clearInputs(e)
-    oStateFilter.unsetSearch()
-    oStateFilter.unsetAll()
-    removeAllTags()
-    
-    await displayCards()        
-})
+cross.addEventListener("click", async function(e) {
+    clearInputs(e);
+    oStateFilter.unsetSearch();
+    oStateFilter.unsetAll();
+    removeAllTags();
+
+    await displayCards();
+});
 
 // AFFICHAGE INITIAL
 displayCards()

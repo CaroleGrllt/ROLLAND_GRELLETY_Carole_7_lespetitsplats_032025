@@ -56,44 +56,48 @@ export default function templateCards(data) {
     const ingredientsList = document.createElement('div')
     ingredientsList.classList.add('ingredients-list', 'd-flex', 'flex-wrap', 'mt-2')
 
-    const ingArray = data.ingredients
-    const ingredientContainer = ingArray.map(ing => {
+    const ingArray = data.ingredients;
+    const ingredientContainer = [];
+
+    for (let i = 0; i < ingArray.length; i++) {
+        const ing = ingArray[i];
         const ingIngredient = ing.ingredient;
-        const ingQuantity = ing.quantity || "" // Gérer le cas où quantity est undefined
-        const ingUnit = ing.unit || "" // Gérer le cas où unit est undefined
-    
-        const ingredient = document.createElement('div')
-        ingredient.classList.add('ingredient', 'd-flex', 'flex-column', 'col-6', 'mb-3')
-    
-        const firstSpan = document.createElement('span')
-        firstSpan.textContent = ingIngredient
-    
-        const secondSpan = document.createElement('span')
-        secondSpan.textContent = ingQuantity + ingUnit
-    
-        ingredient.appendChild(firstSpan)
-        ingredient.appendChild(secondSpan)
-    
-        return ingredient
-    });
-    
+        const ingQuantity = ing.quantity || "";
+        const ingUnit = ing.unit || "";
 
+        const ingredient = document.createElement('div');
+        ingredient.classList.add('ingredient', 'd-flex', 'flex-column', 'col-6', 'mb-3');
 
-    article.appendChild(link)
-    link.appendChild(card)
-    card.appendChild(imgContainer)
-    imgContainer.appendChild(img)
-    imgContainer.appendChild(timeContainer)
-    timeContainer.appendChild(spanTime)
-    card.appendChild(bodyCard)
-    bodyCard.appendChild(h2)
-    bodyCard.appendChild(recipe)
-    recipe.appendChild(cardRecipe)
-    recipe.appendChild(p)
-    bodyCard.appendChild(ingredientsContainer)
-    ingredientsContainer.appendChild(cardIngredient)
-    ingredientsContainer.appendChild(ingredientsList)
-    ingredientContainer.forEach(ingredient => ingredientsList.appendChild(ingredient))
+        const firstSpan = document.createElement('span');
+        firstSpan.textContent = ingIngredient;
 
-    return (article)
+        const secondSpan = document.createElement('span');
+        secondSpan.textContent = ingQuantity + ingUnit;
+
+        ingredient.appendChild(firstSpan);
+        ingredient.appendChild(secondSpan);
+
+        ingredientContainer.push(ingredient);
+    }
+
+    article.appendChild(link);
+    link.appendChild(card);
+    card.appendChild(imgContainer);
+    imgContainer.appendChild(img);
+    imgContainer.appendChild(timeContainer);
+    timeContainer.appendChild(spanTime);
+    card.appendChild(bodyCard);
+    bodyCard.appendChild(h2);
+    bodyCard.appendChild(recipe);
+    recipe.appendChild(cardRecipe);
+    recipe.appendChild(p);
+    bodyCard.appendChild(ingredientsContainer);
+    ingredientsContainer.appendChild(cardIngredient);
+    ingredientsContainer.appendChild(ingredientsList);
+
+    for (let i = 0; i < ingredientContainer.length; i++) {
+        ingredientsList.appendChild(ingredientContainer[i]);
+    }
+
+return article;
 }

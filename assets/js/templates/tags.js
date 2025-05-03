@@ -1,31 +1,40 @@
 
 export default function templateTags(name, type, oStateFilter, displayCards) {
+    // Remplacer includes() par une boucle native
+    const tags = oStateFilter.getTags();
+    let existingTags = false;
 
-    const existingTags = oStateFilter.getTags().includes(name)
-    if (existingTags) return null
+    for (let i = 0; i < tags.length; i++) {
+        if (tags[i] === name) {
+            existingTags = true;
+            break;
+        }
+    }
 
-    oStateFilter.setTags(name)
+    if (existingTags) return null;
 
-    const tag = document.createElement('div')
-    tag.classList.add('tag')
-    tag.setAttribute('data-id', name)
-    tag.setAttribute('data-type', type)
- 
-    const tagTitle = document.createElement('span')
-    tagTitle.textContent = name
- 
-    const closeBtn = document.createElement('span')
-    closeBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>'
-    closeBtn.style.cursor = 'pointer'
+    oStateFilter.setTags(name);
 
-    tag.append(tagTitle, closeBtn)
+    const tag = document.createElement('div');
+    tag.classList.add('tag');
+    tag.setAttribute('data-id', name);
+    tag.setAttribute('data-type', type);
+
+    const tagTitle = document.createElement('span');
+    tagTitle.textContent = name;
+
+    const closeBtn = document.createElement('span');
+    closeBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+    closeBtn.style.cursor = 'pointer';
+
+    tag.append(tagTitle, closeBtn);
 
     closeBtn.addEventListener('click', async (e) => {
-        const target = e.target.closest('.tag')
-        const targetId = target.dataset.id
-        const targetType = target.dataset.type
+        const target = e.target.closest('.tag');
+        const targetId = target.dataset.id;
+        const targetType = target.dataset.type;
 
-        oStateFilter.unsetTags(targetId)
+        oStateFilter.unsetTags(targetId);
 
         if (targetType === 'ingredients') {
             oStateFilter.unsetIngredients(name);
@@ -35,10 +44,9 @@ export default function templateTags(name, type, oStateFilter, displayCards) {
             oStateFilter.unsetUstensils(name);
         }
 
-        tag.remove() //méthode retire l'élément courant du DOM (cf. MDN).
+        tag.remove();
+        await displayCards();
+    });
 
-        await displayCards()
-    })
-
-    return tag
+    return tag;
 }

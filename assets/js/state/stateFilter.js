@@ -1,10 +1,11 @@
 export default class StateFilter {
     constructor() {
-        this.searchLength = 0
-        this.search = []
-        this.appliances = []
-        this.ingredients = []
-        this.ustensils = []
+        this.searchLength   = 0
+        this.search         = []
+        this.appliances     = []
+        this.ingredients    = []
+        this.ustensils      = []
+        this.tags           = []
     }
 
     setSearch(value) {
@@ -41,6 +42,15 @@ export default class StateFilter {
     unsetUstensils(value) {
         this.ustensils = this.ustensils.filter(ustensil => ustensil !== value)
 
+    }
+
+    setTags(value) {
+        console.log(value)
+        this.tags = this.tags.push(value)
+    }
+
+    getTags() {
+        return this.tags
     }
 }
 

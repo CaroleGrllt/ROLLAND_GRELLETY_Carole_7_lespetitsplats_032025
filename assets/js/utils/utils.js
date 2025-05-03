@@ -114,3 +114,13 @@ export function clearInputs(e) {
     }
 
 }
+
+// REMOVE TAGS
+
+export function removeTags() {
+    const tagsContainer     = document.querySelector('.tags-container')
+    const tags              = tagsContainer.querySelectorAll('.tag')
+
+    tags.forEach(tag => tag.remove())
+
+}

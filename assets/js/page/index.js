@@ -1,6 +1,6 @@
 
 import { getRecipes , getIngredientsList , getAppliancesList , getUstensilsList} from "../controllers/recipesController.js";
-import { displayCross, clearInputs } from "../utils/utils.js";
+import { displayCross, clearInputs, removeTags } from "../utils/utils.js";
 import templateCard from '../templates/cards.js'
 import templateFilter from "../templates/filters.js";
 import templateTags from "../templates/tags.js";
@@ -18,6 +18,7 @@ const cardsSection      = document.querySelector(".cards-container")
 const cross             = document.querySelector(".xmark-header")
 const totalRecipes      = document.querySelector(".dynamic-change")
 const tagsContainer     = document.querySelector('.tags-container')
+
 
 // FONCTION AFFICHAGE
 async function displayCards() {
@@ -84,6 +85,8 @@ function displayFilters(recipes) {
 
 //LISTENERS
 searchInput.addEventListener('input', async (e) => {
+    // const tags = tagsContainer.querySelectorAll('.tag')
+
     displayCross(e)
 
     oStateFilter.setSearch(searchInput.value)
@@ -104,9 +107,7 @@ searchInput.addEventListener('input', async (e) => {
         })
     }
 
-    const tagsContainer = document.querySelector('.tags-container')
-    const tags = tagsContainer.querySelectorAll('.tag')
-    tags.forEach(tag => tag.remove())
+    removeTags()
     
     await displayCards()
 })
@@ -114,6 +115,7 @@ searchInput.addEventListener('input', async (e) => {
 cross.addEventListener("click", async (e) => {
     oStateFilter.unsetSearch()
     clearInputs(e)
+    removeTags()
     await displayCards()        
 })
 

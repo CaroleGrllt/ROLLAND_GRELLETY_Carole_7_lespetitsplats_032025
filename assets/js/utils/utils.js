@@ -117,7 +117,7 @@ export function clearInputs(e) {
 
 // REMOVE TAGS
 
-export function removeTags() {
+export function removeAllTags() {
     const tagsContainer     = document.querySelector('.tags-container')
     const tags              = tagsContainer.querySelectorAll('.tag')
 

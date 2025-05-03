@@ -45,13 +45,26 @@ export default class StateFilter {
     }
 
     setTags(value) {
-        console.log(value)
-        this.tags = this.tags.push(value)
+        this.tags.push(value);
     }
 
     getTags() {
         return this.tags
     }
+
+    unsetTags(value) {
+        this.tags = this.tags.filter(tag => tag !== value);
+    }
+
+    unsetAll() {
+        this.searchLength   = 0
+        this.search         = []
+        this.appliances     = []
+        this.ingredients    = []
+        this.ustensils      = []
+        this.tags           = []
+    }
+    
 }
 
 

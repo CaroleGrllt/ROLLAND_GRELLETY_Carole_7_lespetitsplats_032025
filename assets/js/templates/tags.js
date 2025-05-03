@@ -1,14 +1,10 @@
-const tagsArray = []
 
 export default function templateTags(name, type, oStateFilter, displayCards) {
 
-    // const existingTags = tagsArray.includes(name)
     const existingTags = oStateFilter.getTags().includes(name)
     if (existingTags) return null
 
     oStateFilter.setTags(name)
-    // tagsArray.push(name)
-    // console.log(tagsArray)
 
     const tag = document.createElement('div')
     tag.classList.add('tag')
@@ -24,27 +20,25 @@ export default function templateTags(name, type, oStateFilter, displayCards) {
 
     tag.append(tagTitle, closeBtn)
 
-    // closeBtn.addEventListener('click', async (e) => {
-    //     console.log(e.target.closest('.tag'))
-    //     const target = e.target.closest('.tag')
-    //     const targetId = target.dataset.id
-    //     const index = tagsArray.indexOf(targetId)
+    closeBtn.addEventListener('click', async (e) => {
+        const target = e.target.closest('.tag')
+        const targetId = target.dataset.id
+        const targetType = target.dataset.type
 
-    //     tagsArray.splice(index, 1) // index de l'élément + nombre élément à suppr. (cf. MDN)
-    //     console.log(tagsArray)
+        oStateFilter.unsetTags(targetId)
 
-    //     tag.remove() //méthode retire l'élément courant du DOM (cf. MDN).
+        if (targetType === 'ingredients') {
+            oStateFilter.unsetIngredients(name);
+        } else if (targetType === 'appliances') {
+            oStateFilter.unsetAppliances();
+        } else if (targetType === 'ustensils') {
+            oStateFilter.unsetUstensils(name);
+        }
 
-    //     if (type === 'ingredients') {
-    //         oStateFilter.unsetIngredients(name);
-    //     } else if (type === 'appliances') {
-    //         oStateFilter.unsetAppliances();
-    //     } else if (type === 'ustensils') {
-    //         oStateFilter.unsetUstensils(name);
-    //     }
+        tag.remove() //méthode retire l'élément courant du DOM (cf. MDN).
 
-    //     await displayCards()
-    // })
+        await displayCards()
+    })
 
     return tag
 }

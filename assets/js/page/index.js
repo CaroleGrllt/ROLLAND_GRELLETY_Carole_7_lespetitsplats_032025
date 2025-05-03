@@ -1,6 +1,6 @@
 
 import { getRecipes , getIngredientsList , getAppliancesList , getUstensilsList} from "../controllers/recipesController.js";
-import { displayCross, clearInputs, removeAllTags } from "../utils/utils.js";
+import { escapeInjection , displayCross, clearInputs, removeAllTags } from "../utils/utils.js";
 import templateCard from '../templates/cards.js'
 import templateFilter from "../templates/filters.js";
 import templateTags from "../templates/tags.js";
@@ -92,7 +92,10 @@ function displayFilters(recipes) {
 searchInput.addEventListener('input', async function(e) {
     displayCross(e);
 
-    oStateFilter.setSearch(searchInput.value);
+    const value = escapeInjection(searchInput.value);    
+
+
+    oStateFilter.setSearch(value);
 
     if (
         oStateFilter.ingredients.length > 0 ||

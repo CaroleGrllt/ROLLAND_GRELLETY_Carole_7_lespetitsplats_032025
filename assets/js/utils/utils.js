@@ -1,3 +1,22 @@
+// ESCAPE INJECTIONS
+
+export function escapeInjection(value) {
+    const replacements = [
+        { regex: /&/g, replacement: '&amp;' },
+        { regex: /</g, replacement: '&lt;' },
+        { regex: />/g, replacement: '&gt;' },
+        { regex: /"/g, replacement: '&quot;' },
+        { regex: /'/g, replacement: '&#39;' },
+        { regex: /`/g, replacement: '&#96;' }
+    ];
+
+    for (let i = 0; i < replacements.length; i++) {
+        value = value.replace(replacements[i].regex, replacements[i].replacement);
+    }
+
+    return value;
+}
+
 // OPEN/CLOSE DROPDOWNS MENUS
 
 export function toggleBtn(event) {
@@ -69,7 +88,8 @@ document.addEventListener('click', (event) => {
 
 // INPUTS
 export function filterList(e, ul) {
-    const value = e.target.value.toLowerCase().trim()
+    const string = e.target.value.toLowerCase().trim();
+    const value = escapeInjection(string);    
     const filterItems = ul.querySelectorAll('li')
 
     for (let i = 0; i < filterItems.length; i++) {

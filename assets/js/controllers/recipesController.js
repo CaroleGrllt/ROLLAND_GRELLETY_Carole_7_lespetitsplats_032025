@@ -4,247 +4,213 @@ export async function getRecipes(state) {
     const data = dataRecipes()
     let recipes = await data.getAllRecipes()
 
+    // SEARCH FIELD
     if (state.searchLength >= 3) {
         const filtered = []
-        let fIndex = 0
-
         for (let i = 0; i < recipes.length; i++) {
-            const recipe = recipes[i];
-
-            function manualSplit(str) {
-                const result = [];
-                let rIndex = 0;
-                let current = "";
-                for (let j = 0; j <= str.length; j++) {
-                    if (j === str.length || str[j] === " ") {
-                        if (current.length > 0) {
-                            result[rIndex++] = current;
-                        }
-                        current = "";
-                    } else {
-                        current += str[j];
-                    }
-                }
-                return result;
-            }
-
-            const name = manualSplit(recipe.name.toLowerCase());
-            const description = manualSplit(recipe.description.toLowerCase());
-
-            const ingredients = [];
-            let ingIndex = 0;
+            const recipe = recipes[i]
+            const name = recipe.name.toLowerCase().split(' ')
+            const description = recipe.description.toLowerCase().split(' ')
+            const ingredients = []
             for (let j = 0; j < recipe.ingredients.length; j++) {
-                ingredients[ingIndex++] = recipe.ingredients[j].ingredient.toLowerCase();
+                ingredients[ingredients.length] = recipe.ingredients[j].ingredient.toLowerCase()
             }
+            const dataWords = []
+            for (let k = 0; k < name.length; k++) dataWords[dataWords.length] = name[k]
+            for (let k = 0; k < description.length; k++) dataWords[dataWords.length] = description[k]
+            for (let k = 0; k < ingredients.length; k++) dataWords[dataWords.length] = ingredients[k]
 
-            const dataWords = [];
-            let dIndex = 0;
-            for (let j = 0; j < name.length; j++) dataWords[dIndex++] = name[j];
-            for (let j = 0; j < description.length; j++) dataWords[dIndex++] = description[j];
-            for (let j = 0; j < ingredients.length; j++) dataWords[dIndex++] = ingredients[j];
-
-            let allMatch = true;
-            for (let k = 0; k < state.search.length; k++) {
-                const word = state.search[k].toLowerCase();
-                let found = false;
-                for (let l = 0; l < dataWords.length; l++) {
-                    if (dataWords[l].indexOf(word) !== -1) {
-                        found = true;
-                        break;
+            let allWordsFound = true
+            for (let w = 0; w < state.search.length; w++) {
+                const word = state.search[w].toLowerCase()
+                let found = false
+                for (let d = 0; d < dataWords.length; d++) {
+                    if (dataWords[d].indexOf(word) !== -1) {
+                        found = true
+                        break
                     }
                 }
                 if (!found) {
-                    allMatch = false;
-                    break;
+                    allWordsFound = false
+                    break
                 }
             }
-
-            if (allMatch) {
-                filtered[fIndex++] = recipe;
+            if (allWordsFound) {
+                filtered[filtered.length] = recipe
             }
         }
-
-        recipes = filtered;
+        recipes = filtered
     }
 
+    // INGREDIENTS
     if (state.ingredients.length > 0) {
-        const filtered = [];
-        let fIndex = 0;
-
+        const filtered = []
         for (let i = 0; i < recipes.length; i++) {
-            const recipe = recipes[i];
-            const ingredients = [];
-            let ingIndex = 0;
-
+            const recipe = recipes[i]
+            const ingredients = []
             for (let j = 0; j < recipe.ingredients.length; j++) {
-                ingredients[ingIndex++] = recipe.ingredients[j].ingredient.toLowerCase();
+                ingredients[ingredients.length] = recipe.ingredients[j].ingredient.toLowerCase()
             }
 
-            let allFound = true;
-            for (let j = 0; j < state.ingredients.length; j++) {
-                const searchIng = state.ingredients[j].toLowerCase();
-                let found = false;
-                for (let k = 0; k < ingredients.length; k++) {
-                    if (ingredients[k].indexOf(searchIng) !== -1) {
-                        found = true;
-                        break;
+            let allMatch = true
+            for (let k = 0; k < state.ingredients.length; k++) {
+                const searchIng = state.ingredients[k].toLowerCase()
+                let match = false
+                for (let l = 0; l < ingredients.length; l++) {
+                    if (ingredients[l].indexOf(searchIng) !== -1) {
+                        match = true
+                        break
                     }
                 }
-                if (!found) {
-                    allFound = false;
-                    break;
+                if (!match) {
+                    allMatch = false
+                    break
                 }
             }
-
-            if (allFound) {
-                filtered[fIndex++] = recipe;
+            if (allMatch) {
+                filtered[filtered.length] = recipe
             }
         }
-
-        recipes = filtered;
+        recipes = filtered
     }
 
+    // APPLIANCES
     if (state.appliances.length > 0) {
-        const filtered = [];
-        let fIndex = 0;
-
+        const filtered = []
         for (let i = 0; i < recipes.length; i++) {
-            const appliance = recipes[i].appliance.toLowerCase();
-
+            const recipe = recipes[i]
+            const appliance = recipe.appliance.toLowerCase()
+            let match = false
             for (let j = 0; j < state.appliances.length; j++) {
                 if (state.appliances[j].toLowerCase() === appliance) {
-                    filtered[fIndex++] = recipes[i];
-                    break;
+                    match = true
+                    break
                 }
             }
+            if (match) {
+                filtered[filtered.length] = recipe
+            }
         }
-
-        recipes = filtered;
+        recipes = filtered
     }
 
+    // USTENSILS
     if (state.ustensils.length > 0) {
-        const filtered = [];
-        let fIndex = 0;
-
+        const filtered = []
         for (let i = 0; i < recipes.length; i++) {
-            const ustensils = [];
-            let uIndex = 0;
-
-            for (let j = 0; j < recipes[i].ustensils.length; j++) {
-                ustensils[uIndex++] = recipes[i].ustensils[j].toLowerCase();
+            const recipe = recipes[i]
+            const ustensils = []
+            for (let j = 0; j < recipe.ustensils.length; j++) {
+                ustensils[ustensils.length] = recipe.ustensils[j].toLowerCase()
             }
 
-            let allFound = true;
-            for (let j = 0; j < state.ustensils.length; j++) {
-                const searchUst = state.ustensils[j].toLowerCase();
-                let found = false;
-
-                for (let k = 0; k < ustensils.length; k++) {
-                    if (ustensils[k].indexOf(searchUst) !== -1) {
-                        found = true;
-                        break;
+            let allMatch = true
+            for (let k = 0; k < state.ustensils.length; k++) {
+                const searchUst = state.ustensils[k].toLowerCase()
+                let match = false
+                for (let l = 0; l < ustensils.length; l++) {
+                    if (ustensils[l].indexOf(searchUst) !== -1) {
+                        match = true
+                        break
                     }
                 }
-
-                if (!found) {
-                    allFound = false;
-                    break;
+                if (!match) {
+                    allMatch = false
+                    break
                 }
             }
-
-            if (allFound) {
-                filtered[fIndex++] = recipes[i];
+            if (allMatch) {
+                filtered[filtered.length] = recipe
             }
         }
-
-        recipes = filtered;
+        recipes = filtered
     }
 
-    return recipes;
+    return recipes
 }
 
+// INGREDIENTS LIST
 export function getIngredientsList(recipes) {
-    const ingredientsSet = {};
-
+    const ingredientsSet = {}
     for (let i = 0; i < recipes.length; i++) {
-        for (let j = 0; j < recipes[i].ingredients.length; j++) {
-            const ing = recipes[i].ingredients[j].ingredient.toLowerCase();
-            ingredientsSet[ing] = true;
+        const recipe = recipes[i]
+        const ings = recipe.ingredients
+        for (let j = 0; j < ings.length; j++) {
+            const ing = ings[j].ingredient.toLowerCase()
+            ingredientsSet[ing] = true
         }
     }
 
-    const ingredientsArray = [];
-    let index = 0;
+    const result = []
     for (let key in ingredientsSet) {
-        ingredientsArray[index++] = key;
+        result[result.length] = key
     }
 
-    // manual sort
-    for (let i = 0; i < ingredientsArray.length - 1; i++) {
-        for (let j = i + 1; j < ingredientsArray.length; j++) {
-            if (ingredientsArray[i] > ingredientsArray[j]) {
-                const tmp = ingredientsArray[i];
-                ingredientsArray[i] = ingredientsArray[j];
-                ingredientsArray[j] = tmp;
+    // Manual sort (simple bubble sort)
+    for (let i = 0; i < result.length - 1; i++) {
+        for (let j = 0; j < result.length - i - 1; j++) {
+            if (result[j] > result[j + 1]) {
+                const temp = result[j]
+                result[j] = result[j + 1]
+                result[j + 1] = temp
             }
         }
     }
 
-    return ingredientsArray;
+    return result
 }
 
+// APPLIANCES LIST
 export function getAppliancesList(recipes) {
-    const appliancesSet = {};
-
+    const appliancesSet = {}
     for (let i = 0; i < recipes.length; i++) {
-        const appliance = recipes[i].appliance.toLowerCase();
-        appliancesSet[appliance] = true;
+        const appliance = recipes[i].appliance.toLowerCase()
+        appliancesSet[appliance] = true
     }
 
-    const appliancesArray = [];
-    let index = 0;
+    const result = []
     for (let key in appliancesSet) {
-        appliancesArray[index++] = key;
+        result[result.length] = key
     }
 
-    for (let i = 0; i < appliancesArray.length - 1; i++) {
-        for (let j = i + 1; j < appliancesArray.length; j++) {
-            if (appliancesArray[i] > appliancesArray[j]) {
-                const tmp = appliancesArray[i];
-                appliancesArray[i] = appliancesArray[j];
-                appliancesArray[j] = tmp;
+    for (let i = 0; i < result.length - 1; i++) {
+        for (let j = 0; j < result.length - i - 1; j++) {
+            if (result[j] > result[j + 1]) {
+                const temp = result[j]
+                result[j] = result[j + 1]
+                result[j + 1] = temp
             }
         }
     }
 
-    return appliancesArray;
+    return result
 }
 
+// USTENSILS LIST
 export function getUstensilsList(recipes) {
-    const ustensilsSet = {};
-
+    const ustensilsSet = {}
     for (let i = 0; i < recipes.length; i++) {
-        for (let j = 0; j < recipes[i].ustensils.length; j++) {
-            const ust = recipes[i].ustensils[j].toLowerCase();
-            ustensilsSet[ust] = true;
+        const usts = recipes[i].ustensils
+        for (let j = 0; j < usts.length; j++) {
+            const ust = usts[j].toLowerCase()
+            ustensilsSet[ust] = true
         }
     }
 
-    const ustensilsArray = [];
-    let index = 0;
+    const result = []
     for (let key in ustensilsSet) {
-        ustensilsArray[index++] = key;
+        result[result.length] = key
     }
 
-    for (let i = 0; i < ustensilsArray.length - 1; i++) {
-        for (let j = i + 1; j < ustensilsArray.length; j++) {
-            if (ustensilsArray[i] > ustensilsArray[j]) {
-                const tmp = ustensilsArray[i];
-                ustensilsArray[i] = ustensilsArray[j];
-                ustensilsArray[j] = tmp;
+    for (let i = 0; i < result.length - 1; i++) {
+        for (let j = 0; j < result.length - i - 1; j++) {
+            if (result[j] > result[j + 1]) {
+                const temp = result[j]
+                result[j] = result[j + 1]
+                result[j + 1] = temp
             }
         }
     }
 
-    return ustensilsArray;
+    return result
 }

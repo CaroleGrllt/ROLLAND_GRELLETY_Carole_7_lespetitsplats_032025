@@ -10,41 +10,37 @@ export default function templateCards(data) {
 
     const card = document.createElement( 'div' )
     card.classList.add('card')
-    card.classList.add('p-0')
 
     const imgContainer = document.createElement('div')
-    imgContainer.classList.add('position-relative')
+    imgContainer.classList.add('image-container')
 
     const img = document.createElement( 'img' )
     img.setAttribute('src', picture)
     img.setAttribute('alt', `illustration ${data.name}`)
 
     const timeContainer = document.createElement('div')
-    timeContainer.classList.add(
-        'time-container', 'position-absolute', 'py-1', 'px-3', 
-        'rounded-pill', 'top-0', 'end-0', 'mt-3', 'me-3'
-    );
+    timeContainer.classList.add('time-container');
 
     const spanTime = document.createElement('span')
     spanTime.classList.add('time')
     spanTime.textContent = data.time + " min"
 
     const bodyCard = document.createElement('div')
-    bodyCard.classList.add('card-body', 'p-0', 'mx-4', 'my-5');
+    bodyCard.classList.add('card-body');
 
     const h2 = document.createElement('h2')
     h2.classList.add('card-title')
     h2.textContent = data.name
 
     const recipe = document.createElement('div')
-    recipe.classList.add('my-3')
+    recipe.classList.add('card-description')
 
     const cardRecipe = document.createElement('span')
     cardRecipe.classList.add('card-recipe')
     cardRecipe.textContent = 'RECETTE'
 
     const p = document.createElement('p')
-    p.classList.add('card-text', 'mt-2')
+    p.classList.add('card-text')
     p.textContent = data.description
 
     const ingredientsContainer = document.createElement('div')
@@ -54,7 +50,7 @@ export default function templateCards(data) {
     cardIngredient.textContent = "INGREDIENTS"
 
     const ingredientsList = document.createElement('div')
-    ingredientsList.classList.add('ingredients-list', 'd-flex', 'flex-wrap', 'mt-2')
+    ingredientsList.classList.add('ingredients-list')
 
     const ingArray = data.ingredients
     const ingredientContainer = ingArray.map(ing => {
@@ -63,7 +59,7 @@ export default function templateCards(data) {
         const ingUnit = ing.unit || "" // Gérer le cas où unit est undefined
     
         const ingredient = document.createElement('div')
-        ingredient.classList.add('ingredient', 'd-flex', 'flex-column', 'col-6', 'mb-3')
+        ingredient.classList.add('ingredient')
     
         const firstSpan = document.createElement('span')
         firstSpan.textContent = ingIngredient

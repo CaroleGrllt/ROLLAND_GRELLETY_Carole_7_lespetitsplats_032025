@@ -12,16 +12,16 @@ export default function templateFilters(data) {
     ]
 
     const filtersContainer = document.createElement('div');
-    filtersContainer.classList.add('filters-content', 'd-flex', 'flex-column', 'flex-md-row', 'col-12', 'col-md-10', 'col-xl-8', 'gap-md-5')
+    filtersContainer.classList.add('filters-content')
 
         
     filters.forEach(({ type, name }) => {
         const container = document.createElement('div')
-        container.classList.add('select-container', `select-${type}-container`, 'py-2', 'py-md-4')
+        container.classList.add('select-container', `select-${type}-container`)
         container.style.cursor = 'pointer'
 
         const label = document.createElement('div')
-        label.classList.add('select-label', 'bg-white', 'rounded', 'd-flex', 'justify-content-between', 'align-items-center')
+        label.classList.add('select-label')
 
         const title = document.createElement('span')
         title.classList.add('title', `${type}-title`)
@@ -33,20 +33,20 @@ export default function templateFilters(data) {
         label.append(title, dropdownBtn)
 
         const dropdown = document.createElement('div')
-        dropdown.classList.add('select-content-dropdown', 'bg-white', 'rounded-bottom')
+        dropdown.classList.add('select-content-dropdown')
         dropdown.style.display = 'none'
 
         const form = document.createElement('form')
-        form.classList.add('select-input', 'rounded', 'd-flex', 'justify-content-between', 'border', 'bg-white', 'p-1', 'mx-3', 'mb-4', 'mb-md-3')
+        form.classList.add('select-input')
 
         const input = document.createElement('input')
-        input.classList.add('input', `search-${type}`, 'border-0', 'col-10', 'col-md-8')
+        input.classList.add('input', `search-${type}`)
 
         const searchActions = document.createElement('div')
-        searchActions.classList.add('d-flex', 'col-2', 'col-md-4', 'justify-content-around', 'align-items-center')
+        searchActions.classList.add('search-actions')
 
         const clearBtn = document.createElement('span')
-        clearBtn.classList.add(`clear-button-${type}`, 'd-flex', 'justify-content-center', 'align-items-center')
+        clearBtn.classList.add(`clear-button-${type}`)
 
         const xIcon = document.createElement('i')
         xIcon.classList.add('cross', `xmark-${type}`, 'fa-solid', 'fa-xmark')
@@ -62,7 +62,6 @@ export default function templateFilters(data) {
         selectType.classList.add(`select-${type}`)
 
         const ul = document.createElement('ul')
-        ul.classList.add('p-0')
 
         const dataList = data[type] 
         // type = successivement ingredients / appliances / ustensils 

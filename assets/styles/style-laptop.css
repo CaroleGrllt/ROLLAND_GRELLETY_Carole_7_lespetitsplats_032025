@@ -39,10 +39,38 @@
     }
 
     /* FILTERS */
+    .filters-section {
+        padding: 10px 0 20px;
+    }
+
+    .filters-content1 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .filter-content-content {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .filters-container {
+        flex-direction: row;       
+        width: 83.3333%;          
+        gap: 3rem;
+    }
+
+    .filters-content {
+        flex-direction: row;  
+        align-items: center;     
+        width: 83.3333%;           
+        gap: 3rem;                
+    }
 
     .select-container {
         width: 190px;
         position: relative;
+        padding-top: 1.5rem;   
+        padding-bottom: 1.5rem;
     }
 
     .select-content-dropdown {
@@ -52,15 +80,52 @@
         transition: max-height .1s ease-in-out;
     }
 
+    .select-input {
+        margin-bottom: 1rem;            
+    }
+
+    .search-ingredients,
+    .search-appliances,
+    .search-ustensils {
+        width: 66.6667%;
+    }
+
+    .search-actions {
+        width: 33.3333%;               
+    }
+
     .open-dropdown {
         max-height: 260px;
         z-index: 1000;
         display: block;
     }
 
+    .total-recipes-container {
+        width: 16.6667%;                  
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-left: 0;
+        padding-right: 0;
+        justify-content: flex-end;        
+    }
+
     .total-recipes {
         font-size: 18px;
     }
+
+    /* ERREUR */
+
+    .error-section {
+        margin-left: auto;          
+        margin-right: auto;
+    }
+
+    /* TAGS */
+
+    .tags-container {
+        justify-content: flex-start;
+    }
+
     /* CARDS */
 
     .cards-container {

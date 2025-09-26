@@ -8,7 +8,8 @@ export default function dataRecipes() {
 
     async function getData() {
     try {
-      const url = new URL('../../assets/data/recipes.json', import.meta.url);
+      const url = new URL('../../data/recipes.json', import.meta.url);
+      console.log(url.href);
       const res = await fetch(url);
       if (!res.ok) throw new Error(`HTTP ${res.status} sur ${res.url}`);
       return await res.json();

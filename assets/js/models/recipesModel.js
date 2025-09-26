@@ -7,9 +7,14 @@
 export default function dataRecipes() {
 
     async function getData() {
-        return await fetch('../../assets/data/recipes.json') 
-        .then(res => res.json())
-        .catch(err => console.log("Une erreur s'est produite dans la récupération des données json : ", err))
+        try {
+            const url = new URL('../../assets/data/recipes.json', import.meta.url);
+            const res = await fetch(url);
+            return await res.json();
+        } catch (err) {
+            console.log("Une erreur s'est produite dans la récupération des données json :", err);
+            return { recipes: [] };
+        }
     }
 
     async function getAllRecipes() {
